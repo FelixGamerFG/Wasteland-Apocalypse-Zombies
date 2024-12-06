@@ -1,0 +1,118 @@
+[gd_scene load_steps=17 format=3 uid="uid://dfl4ht66luubx"]
+
+[ext_resource type="Script" path="res://addons/virtual_joystick/test/player.gd" id="1_bwflo"]
+[ext_resource type="Texture2D" uid="uid://dj3rbgplleckx" path="res://Resource/sprites_player_ajolote-Sheet.png" id="2_deyol"]
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="3_4wvff"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_riwup"]
+atlas = ExtResource("2_deyol")
+region = Rect2(0, 111, 64, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8om5d"]
+atlas = ExtResource("2_deyol")
+region = Rect2(64, 111, 64, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d14i4"]
+atlas = ExtResource("2_deyol")
+region = Rect2(128, 111, 64, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_slk40"]
+atlas = ExtResource("2_deyol")
+region = Rect2(192, 111, 64, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_34c7a"]
+atlas = ExtResource("2_deyol")
+region = Rect2(256, 111, 64, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nl3g1"]
+atlas = ExtResource("2_deyol")
+region = Rect2(320, 111, 64, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1i282"]
+atlas = ExtResource("2_deyol")
+region = Rect2(0, 0, 64, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_62gbe"]
+atlas = ExtResource("2_deyol")
+region = Rect2(64, 0, 64, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_60o8g"]
+atlas = ExtResource("2_deyol")
+region = Rect2(128, 0, 64, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gxaoy"]
+atlas = ExtResource("2_deyol")
+region = Rect2(192, 0, 64, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sol3t"]
+atlas = ExtResource("2_deyol")
+region = Rect2(256, 0, 64, 36)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jcfcd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_riwup")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8om5d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d14i4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_slk40")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_34c7a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nl3g1")
+}],
+"loop": true,
+"name": &"CAMINAR",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1i282")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_62gbe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_60o8g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gxaoy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sol3t")
+}],
+"loop": true,
+"name": &"QUIETO",
+"speed": 10.0
+}]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_lgxgu"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="PJ" type="CharacterBody2D"]
+script = ExtResource("1_bwflo")
+
+[node name="Anim" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_jcfcd")
+animation = &"CAMINAR"
+frame_progress = 0.795889
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Virtual joystick left" parent="UI" instance=ExtResource("3_4wvff")]
+offset_top = -300.0
+offset_bottom = 0.0
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_lgxgu")
