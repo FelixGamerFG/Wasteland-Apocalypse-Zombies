@@ -3,7 +3,7 @@ extends CharacterBody2D
 @export var speed : float = 100
 
 @export var joystick_left : VirtualJoystick
-@export var Anim = $Anim
+@onready var Anim = $Anim
 
 var move_vector = Vector2.ZERO
 
@@ -31,7 +31,7 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	if !is_multiplayer_authority(): return
 	## Movement using Input functions:
-	move_vector = Vector2.ZERO
-	move_vector = Input.get_axis("ui_left","ui_right")
-	velocity.x += move_vector * speed * delta
+	velocity = Input.get_vector("ui_left","ui_right", "ui_up", "ui_down") * speed
+	move_and_slide()
+	
 	

@@ -1,112 +1,82 @@
-[gd_scene load_steps=17 format=3 uid="uid://dfl4ht66luubx"]
+[gd_scene load_steps=9 format=3 uid="uid://dfl4ht66luubx"]
 
 [ext_resource type="Script" path="res://addons/virtual_joystick/test/player.gd" id="1_bwflo"]
 [ext_resource type="Texture2D" uid="uid://dj3rbgplleckx" path="res://Resource/sprites_player_ajolote-Sheet.png" id="2_deyol"]
 [ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="3_4wvff"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_riwup"]
-atlas = ExtResource("2_deyol")
-region = Rect2(0, 111, 64, 36)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8om5d"]
-atlas = ExtResource("2_deyol")
-region = Rect2(64, 111, 64, 36)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_d14i4"]
-atlas = ExtResource("2_deyol")
-region = Rect2(128, 111, 64, 36)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_slk40"]
-atlas = ExtResource("2_deyol")
-region = Rect2(192, 111, 64, 36)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_34c7a"]
-atlas = ExtResource("2_deyol")
-region = Rect2(256, 111, 64, 36)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nl3g1"]
-atlas = ExtResource("2_deyol")
-region = Rect2(320, 111, 64, 36)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1i282"]
-atlas = ExtResource("2_deyol")
-region = Rect2(0, 0, 64, 36)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_62gbe"]
-atlas = ExtResource("2_deyol")
-region = Rect2(64, 0, 64, 36)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_60o8g"]
-atlas = ExtResource("2_deyol")
-region = Rect2(128, 0, 64, 36)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gxaoy"]
-atlas = ExtResource("2_deyol")
-region = Rect2(192, 0, 64, 36)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sol3t"]
-atlas = ExtResource("2_deyol")
-region = Rect2(256, 0, 64, 36)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_jcfcd"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_riwup")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8om5d")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_d14i4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_slk40")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_34c7a")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nl3g1")
-}],
-"loop": true,
-"name": &"CAMINAR",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1i282")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_62gbe")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_60o8g")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gxaoy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sol3t")
-}],
-"loop": true,
-"name": &"QUIETO",
-"speed": 10.0
-}]
-
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_lgxgu"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
+properties/1/path = NodePath("Anim:current_animation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[sub_resource type="Animation" id="Animation_bh51l"]
+resource_name = "QUIETO"
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_7wob4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_mvyqt"]
+resource_name = "CAMINAR"
+length = 0.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [39, 40, 41, 42, 43, 44]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fhbfd"]
+_data = {
+"CAMINAR": SubResource("Animation_mvyqt"),
+"QUIETO": SubResource("Animation_bh51l"),
+"RESET": SubResource("Animation_7wob4")
+}
 
 [node name="PJ" type="CharacterBody2D"]
 script = ExtResource("1_bwflo")
 
-[node name="Anim" type="AnimatedSprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-sprite_frames = SubResource("SpriteFrames_jcfcd")
-animation = &"CAMINAR"
-frame_progress = 0.795889
+texture = ExtResource("2_deyol")
+hframes = 13
+vframes = 12
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -116,3 +86,8 @@ offset_bottom = 0.0
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_lgxgu")
+
+[node name="Anim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_fhbfd")
+}

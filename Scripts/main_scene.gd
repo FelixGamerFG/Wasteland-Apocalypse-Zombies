@@ -1,26 +1,23 @@
 extends Node
+
 @onready var menu = $CenterContainer
 var peer : ENetMultiplayerPeer = ENetMultiplayerPeer.new()
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+var port = "192.168.0.0" #for gpa
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+
 
 
 func _on_host_pressed() -> void:
-	peer.create_server(7777,5)
+	peer.create_server(3500,5)
 	multiplayer.multiplayer_peer = peer
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	_on_peer_connected()
 	menu.hide()
 
 func _on_join_pressed() -> void:
-	peer.create_client("192.168.43.1", 7777)
+	peer.create_client("localhost", 3500)
 	multiplayer.multiplayer_peer = peer
 	menu.hide()
 
