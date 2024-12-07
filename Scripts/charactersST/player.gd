@@ -5,6 +5,9 @@ extends CharacterBody2D
 
 @export var joystick_left : VirtualJoystick
 @onready var Anim = $Anim
+@onready var Camara = $Camara
+
+@onready var Skin2d : Sprite2D = $Sprite2D
 
 var move_vector = Vector2.ZERO
 
@@ -18,12 +21,17 @@ func _process(delta: float) -> void:
 
 
 	if !is_multiplayer_authority(): return
+	## Script para darle autoridad a la camara de cada jugador
+	Camara.enabled = true
+	
 	
 	if velocity.x > 0 && velocity.y == 0:
 		Anim.play("CAMIMAR")
+		Skin2d.flip_h = false
 		
 	if velocity.x < 0 && velocity.y == 0:
 		Anim.play("CAMINAR")
+		Skin2d.flip_h = true
 		
 	if velocity.x == 0:
 		Anim.play("QUIETO")
@@ -43,8 +51,8 @@ func _physics_process(delta: float) -> void:
 		velocity.y += grav
 		
 	#salto
-	if is_on_floor():
-		velocity.y = -grav
+	"""if is_on_floor():
+		velocity.y = -grav"""
 	
 	#movimientos horizontales
 	velocity.x = Input.get_axis("ui_left","ui_right") * speed

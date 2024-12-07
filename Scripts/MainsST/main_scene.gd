@@ -8,12 +8,13 @@ var peer : ENetMultiplayerPeer = ENetMultiplayerPeer.new()
 var IP_ADRESS = "localhost" #for gpa
 var PORT = 3500
 
-
 func _ready() -> void:
 	pass
 
 func _process(delta: float) -> void:
-	$textMap.text = IP_ADRESS
+	$CanvasLayer/textMap.text = IP_ADRESS
+	if Input.is_action_just_pressed("ui_accept"):
+		get_tree().reload_current_scene()
 	
 ##Por ahora no funciona
 	if IP_edit.text == "":
@@ -36,7 +37,7 @@ func _on_join_pressed() -> void:
 
 
 func _on_peer_connected(id : int = 1):
-	$textMap.visible = true
+	$CanvasLayer/textMap.visible = true
 	IP_ADRESS = IP_edit.text 
 	var player_scene = preload("res://scenes/characters/players/pj.tscn").instantiate()
 	player_scene.name = str(id)

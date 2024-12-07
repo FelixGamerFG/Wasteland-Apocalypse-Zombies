@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://bcpwqxjp3guwp"]
+[gd_scene load_steps=3 format=3 uid="uid://bcpwqxjp3guwp"]
 
 [ext_resource type="Script" path="res://Scripts/MainsST/main_scene.gd" id="1_2832d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v1k1n"]
+size = Vector2(1185, 20)
 
 [node name="main_scene" type="Node"]
 script = ExtResource("1_2832d")
@@ -35,14 +38,23 @@ placeholder_text = "IP"
 alignment = 1
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/characters/players/pj.tscn")
 spawn_path = NodePath("..")
 
-[node name="textMap" type="Label" parent="."]
-visible = false
-offset_left = 435.0
-offset_top = 245.0
-offset_right = 735.0
-offset_bottom = 382.0
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-13, 571)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(582.5, 0)
+shape = SubResource("RectangleShape2D_v1k1n")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="textMap" type="Label" parent="CanvasLayer"]
+offset_left = 3.0
+offset_top = 6.0
+offset_right = 303.0
+offset_bottom = 143.0
 theme_override_font_sizes/font_size = 100
 text = "mapa "
 

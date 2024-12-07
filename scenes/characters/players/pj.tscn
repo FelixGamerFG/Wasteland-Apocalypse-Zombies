@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dfl4ht66luubx"]
+[gd_scene load_steps=10 format=3 uid="uid://dfl4ht66luubx"]
 
 [ext_resource type="Script" path="res://Scripts/charactersST/player.gd" id="1_ewq7v"]
 [ext_resource type="Texture2D" uid="uid://dj3rbgplleckx" path="res://resource/Sprites/characters/players/sprites_player_ajolote-Sheet.png" id="2_vojou"]
@@ -11,7 +11,7 @@ properties/0/replication_mode = 1
 properties/1/path = NodePath("Anim:current_animation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
-properties/2/path = NodePath("Camara:position_smoothing_enabled")
+properties/2/path = NodePath("Sprite2D:flip_h")
 properties/2/spawn = true
 properties/2/replication_mode = 1
 
@@ -72,6 +72,9 @@ _data = {
 "RESET": SubResource("Animation_7wob4")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t5xkd"]
+size = Vector2(20, 30)
+
 [node name="PJ" type="CharacterBody2D"]
 script = ExtResource("1_ewq7v")
 
@@ -96,8 +99,12 @@ libraries = {
 }
 
 [node name="Camara" type="Camera2D" parent="."]
-position = Vector2(0, -33)
+position = Vector2(2, 1)
 enabled = false
 zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 position_smoothing_speed = 6.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_t5xkd")
