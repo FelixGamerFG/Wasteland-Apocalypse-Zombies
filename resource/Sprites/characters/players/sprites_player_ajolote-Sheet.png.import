@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dj3rbgplleckx"
-path="res://.godot/imported/sprites_player_ajolote-Sheet.png-8cfb233e32aa272fe57550e73c012f10.ctex"
+path="res://.godot/imported/sprites_player_ajolote-Sheet.png-b229c0e897ed0c9e77e036090d0bfff9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resource/sprites_player_ajolote-Sheet.png"
-dest_files=["res://.godot/imported/sprites_player_ajolote-Sheet.png-8cfb233e32aa272fe57550e73c012f10.ctex"]
+source_file="res://resource/Sprites/characters/players/sprites_player_ajolote-Sheet.png"
+dest_files=["res://.godot/imported/sprites_player_ajolote-Sheet.png-b229c0e897ed0c9e77e036090d0bfff9.ctex"]
 
 [params]
 

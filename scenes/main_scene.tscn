@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://bcpwqxjp3guwp"]
 
-[ext_resource type="Script" path="res://Scripts/main_scene.gd" id="1_d513h"]
+[ext_resource type="Script" path="res://Scripts/MainsST/main_scene.gd" id="1_2832d"]
 
 [node name="main_scene" type="Node"]
-script = ExtResource("1_d513h")
+script = ExtResource("1_2832d")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchors_preset = 15
@@ -27,8 +27,16 @@ theme_override_font_sizes/font_size = 64
 text = "Unirse"
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://pj.tscn")
 spawn_path = NodePath("..")
+
+[node name="textMap" type="Label" parent="."]
+visible = false
+offset_left = 435.0
+offset_top = 245.0
+offset_right = 735.0
+offset_bottom = 382.0
+theme_override_font_sizes/font_size = 100
+text = "mapa "
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/join" to="." method="_on_join_pressed"]

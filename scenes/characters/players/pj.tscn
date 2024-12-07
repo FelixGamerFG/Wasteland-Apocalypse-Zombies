@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://dfl4ht66luubx"]
 
-[ext_resource type="Script" path="res://addons/virtual_joystick/test/player.gd" id="1_bwflo"]
-[ext_resource type="Texture2D" uid="uid://dj3rbgplleckx" path="res://Resource/sprites_player_ajolote-Sheet.png" id="2_deyol"]
-[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="3_4wvff"]
+[ext_resource type="Script" path="res://Scripts/charactersST/player.gd" id="1_ewq7v"]
+[ext_resource type="Texture2D" uid="uid://dj3rbgplleckx" path="res://resource/Sprites/characters/players/sprites_player_ajolote-Sheet.png" id="2_vojou"]
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="3_6l8q6"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_lgxgu"]
 properties/0/path = NodePath(".:position")
@@ -11,6 +11,27 @@ properties/0/replication_mode = 1
 properties/1/path = NodePath("Anim:current_animation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
+properties/2/path = NodePath("Camara:position_smoothing_enabled")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
+[sub_resource type="Animation" id="Animation_mvyqt"]
+resource_name = "CAMINAR"
+length = 0.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [39, 40, 41, 42, 43, 44]
+}
 
 [sub_resource type="Animation" id="Animation_bh51l"]
 resource_name = "QUIETO"
@@ -44,24 +65,6 @@ tracks/0/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_mvyqt"]
-resource_name = "CAMINAR"
-length = 0.6
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [39, 40, 41, 42, 43, 44]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fhbfd"]
 _data = {
 "CAMINAR": SubResource("Animation_mvyqt"),
@@ -70,17 +73,17 @@ _data = {
 }
 
 [node name="PJ" type="CharacterBody2D"]
-script = ExtResource("1_bwflo")
+script = ExtResource("1_ewq7v")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("2_deyol")
+texture = ExtResource("2_vojou")
 hframes = 13
 vframes = 12
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Virtual joystick left" parent="UI" instance=ExtResource("3_4wvff")]
+[node name="Virtual joystick left" parent="UI" instance=ExtResource("3_6l8q6")]
 offset_top = -300.0
 offset_bottom = 0.0
 
@@ -91,3 +94,9 @@ replication_config = SubResource("SceneReplicationConfig_lgxgu")
 libraries = {
 "": SubResource("AnimationLibrary_fhbfd")
 }
+
+[node name="Camara" type="Camera2D" parent="."]
+position = Vector2(0, -33)
+zoom = Vector2(3, 3)
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0

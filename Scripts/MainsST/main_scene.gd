@@ -6,7 +6,8 @@ var peer : ENetMultiplayerPeer = ENetMultiplayerPeer.new()
 var port = "192.168.0.0" #for gpa
 
 
-
+func _ready() -> void:
+	pass
 
 
 func _on_host_pressed() -> void:
@@ -23,7 +24,7 @@ func _on_join_pressed() -> void:
 
 
 func _on_peer_connected(id : int = 1):
-	var player_scene = load("res://pj.tscn")
-	var player_instance = player_scene.instantiate()
-	player_instance.name = str(id)
-	add_child(player_instance, true)
+	var player_scene = preload("res://scenes/characters/players/pj.tscn").instantiate()
+	player_scene.name = str(id)
+	add_child(player_scene, true)
+	print(str(id))

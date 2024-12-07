@@ -11,9 +11,18 @@ config_version=5
 [application]
 
 config/name="Multiplayer"
-run/main_scene="res://main_scene.tscn"
+run/main_scene="res://scenes/main_scene.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[file_customization]
+
+folder_colors={
+"res://Scripts/": "green",
+"res://addons/": "purple",
+"res://resource/": "yellow",
+"res://scenes/": "orange"
+}
 
 [input_devices]
 
