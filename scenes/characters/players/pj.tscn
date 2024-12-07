@@ -97,6 +97,7 @@ libraries = {
 
 [node name="Camara" type="Camera2D" parent="."]
 position = Vector2(0, -33)
+enabled = false
 zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 position_smoothing_speed = 6.0

@@ -1,29 +1,43 @@
 extends Node
 
 @onready var menu = $CenterContainer
+@onready var IP_edit = $CenterContainer/VBoxContainer/LineEdit
+
 var peer : ENetMultiplayerPeer = ENetMultiplayerPeer.new()
 
-var port = "192.168.0.0" #for gpa
+var IP_ADRESS = "localhost" #for gpa
+var PORT = 3500
 
 
 func _ready() -> void:
 	pass
 
-
+func _process(delta: float) -> void:
+	$textMap.text = IP_ADRESS
+	
+##Por ahora no funciona
+	if IP_edit.text == "":
+		IP_ADRESS = "192.168.43.1"
+		
+	if IP_edit.text == "1":
+		IP_ADRESS = "localhost"
+		
 func _on_host_pressed() -> void:
-	peer.create_server(3500,5)
+	peer.create_server(PORT,5)
 	multiplayer.multiplayer_peer = peer
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	_on_peer_connected()
 	menu.hide()
 
 func _on_join_pressed() -> void:
-	peer.create_client("localhost", 3500)
+	peer.create_client(IP_ADRESS,PORT)
 	multiplayer.multiplayer_peer = peer
 	menu.hide()
 
 
 func _on_peer_connected(id : int = 1):
+	$textMap.visible = true
+	IP_ADRESS = IP_edit.text 
 	var player_scene = preload("res://scenes/characters/players/pj.tscn").instantiate()
 	player_scene.name = str(id)
 	add_child(player_scene, true)
