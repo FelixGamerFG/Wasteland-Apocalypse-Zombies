@@ -3,7 +3,7 @@ extends Node
 const SaveFile  = "user://SaveFile_jp.save"
 
 var datosJP = {
-	"Nombre": "felix mamaguevo"
+	"Nombre": "GPA mamaguevo"
 }
 
 func _ready() -> void:
