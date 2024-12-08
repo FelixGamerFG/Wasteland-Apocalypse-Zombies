@@ -29,6 +29,7 @@ func _on_host_pressed() -> void:
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	_on_peer_connected()
 	menu.hide()
+	
 
 func _on_join_pressed() -> void:
 	peer.create_client(IP_ADRESS,PORT)
@@ -39,7 +40,7 @@ func _on_join_pressed() -> void:
 func _on_peer_connected(id : int = 1):
 	$CanvasLayer/textMap.visible = true
 	IP_ADRESS = IP_edit.text 
-	var player_scene = preload("res://scenes/characters/players/pj.tscn").instantiate()
+	var player_scene = load("res://scenes/characters/players/pj.tscn").instantiate()
 	player_scene.name = str(id)
 	add_child(player_scene, true)
 	print(str(id))
