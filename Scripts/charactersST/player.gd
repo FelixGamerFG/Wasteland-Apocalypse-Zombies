@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export var speed : float = 100
+@export var jump : float = 400
 @export var grav: float = 50
 
 @export var joystick_left : VirtualJoystick
@@ -51,8 +52,8 @@ func _physics_process(delta: float) -> void:
 		velocity.y += grav
 		
 	#salto
-	"""if is_on_floor():
-		velocity.y = -grav"""
+	if is_on_floor() && Input.is_action_just_pressed("ui_up"):
+		velocity.y -= jump
 	
 	#movimientos horizontales
 	velocity.x = Input.get_axis("ui_left","ui_right") * speed
