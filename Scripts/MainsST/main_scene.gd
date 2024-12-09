@@ -1,28 +1,40 @@
 extends Node
 
-@onready var menu = $Control/CenterContainer
-@onready var IP_edit = $Control/CenterContainer/VBoxContainer/LineEdit
+@onready var IP_edit = $CanvasLayer/Control/CenterContainer/VBoxContainer/LineEdit
+@onready var multijugador_title: Label = $CanvasLayer/Control/MultijugadorTitle
+@onready var text_map: Label = $CanvasLayer/Control/textMap
+@onready var center_container: CenterContainer = $CanvasLayer/Control/CenterContainer
+@onready var create_edit: Button = $CanvasLayer/Control/CreateEdit
+@onready var name_edit: LineEdit = $CanvasLayer/Control/NameEdit
+@onready var menu: CanvasLayer = $CanvasLayer
+
+
 
 var peer : ENetMultiplayerPeer = ENetMultiplayerPeer.new()
 
 var IP_ADRESS = "localhost" #for gpa
-var PORT = 0000
+var PORT = 7777
+
+
+
 
 func _ready() -> void:
 	
 	#verificar cuenta existente
 	if Data_Pj.datosJP.Nombre != "name_null":
-		$CanvasLayer/textMap.visible = true
-		$Control/CenterContainer.visible = true
-		$Control/NameEdit.visible = false
-		$Control/CreateEdit.visible = false
+		text_map.visible = true
+		multijugador_title.visible = true
+		center_container.visible = true
+		name_edit.visible = false
+		create_edit.visible = false
 	else:
-		$Control/CenterContainer.visible = false
-		$Control/NameEdit.visible = true
-		$CanvasLayer/textMap.visible = false
+		center_container.visible = false
+		name_edit.visible = true
+		text_map.visible = false
+		multijugador_title.visible = false
 
 func _process(delta: float) -> void:
-	$CanvasLayer/textMap.text = IP_ADRESS
+	text_map.text = IP_ADRESS
 	if Input.is_action_just_pressed("ui_accept"):
 		get_tree().reload_current_scene()
 		
@@ -57,7 +69,7 @@ func _on_join_pressed() -> void:
 
 
 func _on_peer_connected(id : int = 1):
-	$CanvasLayer/textMap.visible = true
+	text_map.visible = true
 	IP_ADRESS = IP_edit.text 
 	var player_scene = load("res://scenes/characters/players/pj.tscn").instantiate()
 	player_scene.name = str(id)
@@ -66,11 +78,11 @@ func _on_peer_connected(id : int = 1):
 
 
 func _on_create_edit_pressed() -> void:
-	$CanvasLayer/textMap.visible = true
-	$Control/CenterContainer.visible = true
-	$Control/NameEdit.visible = false
-	$Control/CreateEdit.visible = false
-	Data_Pj.datosJP.Nombre = $Control/NameEdit.text
+	text_map.visible = true
+	center_container.visible = true
+	name_edit.visible = false
+	create_edit.visible = false
+	Data_Pj.datosJP.Nombre = name_edit.text
 	Data_Pj._save_data()
 	
 	pass

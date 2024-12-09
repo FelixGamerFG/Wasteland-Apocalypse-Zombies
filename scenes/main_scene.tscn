@@ -8,60 +8,67 @@ size = Vector2(1185, 20)
 [node name="main_scene" type="Node"]
 script = ExtResource("1_2832d")
 
-[node name="Control" type="Control" parent="."]
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/characters/players/pj.tscn")
+spawn_path = NodePath("..")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="CenterContainer" type="CenterContainer" parent="Control"]
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Control"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 370.0
-offset_top = 146.0
-offset_right = 748.0
-offset_bottom = 437.0
+offset_left = 456.0
+offset_top = 214.0
+offset_right = 834.0
+offset_bottom = 505.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.608639, 0.608639)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/CenterContainer"]
 layout_mode = 2
 theme_override_constants/separation = 43
 alignment = 1
 
-[node name="host" type="Button" parent="Control/CenterContainer/VBoxContainer"]
+[node name="host" type="Button" parent="CanvasLayer/Control/CenterContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 64
 text = "Crear Partida"
 
-[node name="join" type="Button" parent="Control/CenterContainer/VBoxContainer"]
+[node name="join" type="Button" parent="CanvasLayer/Control/CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "Unirse"
 
-[node name="LineEdit" type="LineEdit" parent="Control/CenterContainer/VBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/Control/CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 placeholder_text = "IP"
 alignment = 1
 
-[node name="NameEdit" type="LineEdit" parent="Control"]
-layout_mode = 2
+[node name="NameEdit" type="LineEdit" parent="CanvasLayer/Control"]
+layout_mode = 0
 offset_left = 353.0
 offset_top = 68.0
 offset_right = 1853.0
 offset_bottom = 213.0
 scale = Vector2(0.3, 0.3)
 theme_override_font_sizes/font_size = 100
-text = "What You Name?"
+placeholder_text = "What You Name?"
 alignment = 1
 
-[node name="CreateEdit" type="Button" parent="Control"]
-layout_mode = 2
+[node name="CreateEdit" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 0
 offset_left = 468.0
 offset_top = 441.0
 offset_right = 886.0
@@ -71,19 +78,29 @@ size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 64
 text = "Create Count"
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://scenes/characters/players/pj.tscn")
-spawn_path = NodePath("..")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="textMap" type="Label" parent="CanvasLayer"]
-offset_left = 3.0
-offset_top = 6.0
-offset_right = 303.0
-offset_bottom = 143.0
+[node name="textMap" type="Label" parent="CanvasLayer/Control"]
+visible = false
+layout_mode = 0
+offset_left = 499.0
+offset_top = 154.0
+offset_right = 1038.0
+offset_bottom = 291.0
+scale = Vector2(0.298493, 0.298493)
 theme_override_font_sizes/font_size = 100
-text = "mapa "
+text = "192.168.0.0"
+horizontal_alignment = 1
+
+[node name="MultijugadorTitle" type="Label" parent="CanvasLayer/Control"]
+visible = false
+layout_mode = 0
+offset_left = 425.0
+offset_top = 56.0
+offset_right = 1448.0
+offset_bottom = 193.0
+scale = Vector2(0.298493, 0.298493)
+theme_override_font_sizes/font_size = 100
+text = "MODE MULTYPLAYER"
+horizontal_alignment = 1
 
 [node name="Map" type="Node" parent="."]
 
@@ -94,6 +111,6 @@ position = Vector2(-13, 571)
 position = Vector2(582.5, 0)
 shape = SubResource("RectangleShape2D_v1k1n")
 
-[connection signal="pressed" from="Control/CenterContainer/VBoxContainer/host" to="." method="_on_host_pressed"]
-[connection signal="pressed" from="Control/CenterContainer/VBoxContainer/join" to="." method="_on_join_pressed"]
-[connection signal="pressed" from="Control/CreateEdit" to="." method="_on_create_edit_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/CenterContainer/VBoxContainer/host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/CenterContainer/VBoxContainer/join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/CreateEdit" to="." method="_on_create_edit_pressed"]
