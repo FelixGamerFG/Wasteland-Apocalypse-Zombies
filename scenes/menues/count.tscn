@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3 uid="uid://d17buy7u68rvx"]
+
+[ext_resource type="Script" path="res://Scripts/MainsST/count_scene.gd" id="1_vqmxk"]
+
+[node name="Count" type="Node"]
+script = ExtResource("1_vqmxk")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NameEdit" type="LineEdit" parent="Control"]
+layout_mode = 0
+offset_left = 353.0
+offset_top = 68.0
+offset_right = 1853.0
+offset_bottom = 213.0
+scale = Vector2(0.3, 0.3)
+theme_override_font_sizes/font_size = 100
+placeholder_text = "What You Name?"
+alignment = 1
+
+[node name="CreateEdit" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 468.0
+offset_top = 441.0
+offset_right = 886.0
+offset_bottom = 537.0
+scale = Vector2(0.595, 0.595)
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 64
+text = "Create Count"
+
+[connection signal="pressed" from="Control/CreateEdit" to="." method="_on_create_edit_pressed"]

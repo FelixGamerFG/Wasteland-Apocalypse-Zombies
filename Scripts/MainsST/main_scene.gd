@@ -4,44 +4,21 @@ extends Node
 @onready var multijugador_title: Label = $CanvasLayer/Control/MultijugadorTitle
 @onready var text_map: Label = $CanvasLayer/Control/textMap
 @onready var center_container: CenterContainer = $CanvasLayer/Control/CenterContainer
-@onready var create_edit: Button = $CanvasLayer/Control/CreateEdit
-@onready var name_edit: LineEdit = $CanvasLayer/Control/NameEdit
 @onready var menu: CanvasLayer = $CanvasLayer
 
 
-
 var peer : ENetMultiplayerPeer = ENetMultiplayerPeer.new()
-
 var IP_ADRESS = "localhost" #for gpa
 var PORT = 7777
 
 
 
 
-func _ready() -> void:
-	
-	#verificar cuenta existente
-	if Data_Pj.datosJP.Nombre != "name_null":
-		text_map.visible = true
-		multijugador_title.visible = true
-		center_container.visible = true
-		name_edit.visible = false
-		create_edit.visible = false
-	else:
-		center_container.visible = false
-		name_edit.visible = true
-		text_map.visible = false
-		multijugador_title.visible = false
-
 func _process(delta: float) -> void:
 	text_map.text = IP_ADRESS
 	if Input.is_action_just_pressed("ui_accept"):
 		get_tree().reload_current_scene()
 		
-	
-	#sistema de iniciar cuenta
-	
-	
 	
 	
 	
@@ -80,9 +57,6 @@ func _on_peer_connected(id : int = 1):
 func _on_create_edit_pressed() -> void:
 	text_map.visible = true
 	center_container.visible = true
-	name_edit.visible = false
-	create_edit.visible = false
-	Data_Pj.datosJP.Nombre = name_edit.text
 	Data_Pj._save_data()
 	
 	pass
