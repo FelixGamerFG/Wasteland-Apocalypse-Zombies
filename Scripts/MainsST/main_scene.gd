@@ -1,24 +1,43 @@
 extends Node
 
-@onready var menu = $CenterContainer
-@onready var IP_edit = $CenterContainer/VBoxContainer/LineEdit
+@onready var menu = $Control/CenterContainer
+@onready var IP_edit = $Control/CenterContainer/VBoxContainer/LineEdit
 
 var peer : ENetMultiplayerPeer = ENetMultiplayerPeer.new()
 
 var IP_ADRESS = "localhost" #for gpa
-var PORT = 3500
+var PORT = 0000
 
 func _ready() -> void:
-	pass
+	
+	#verificar cuenta existente
+	if Data_Pj.datosJP.Nombre != "name_null":
+		$CanvasLayer/textMap.visible = true
+		$Control/CenterContainer.visible = true
+		$Control/NameEdit.visible = false
+		$Control/CreateEdit.visible = false
+	else:
+		$Control/CenterContainer.visible = false
+		$Control/NameEdit.visible = true
+		$CanvasLayer/textMap.visible = false
 
 func _process(delta: float) -> void:
 	$CanvasLayer/textMap.text = IP_ADRESS
 	if Input.is_action_just_pressed("ui_accept"):
 		get_tree().reload_current_scene()
+		
+	
+	#sistema de iniciar cuenta
+	
+	
+	
+	
 	
 ##Por ahora no funciona
 	if IP_edit.text == "":
 		IP_ADRESS = "192.168.43.1"
+	else:
+		IP_ADRESS = IP_edit.text
 		
 	if IP_edit.text == "1":
 		IP_ADRESS = "localhost"
@@ -44,3 +63,14 @@ func _on_peer_connected(id : int = 1):
 	player_scene.name = str(id)
 	add_child(player_scene, true)
 	print(str(id))
+
+
+func _on_create_edit_pressed() -> void:
+	$CanvasLayer/textMap.visible = true
+	$Control/CenterContainer.visible = true
+	$Control/NameEdit.visible = false
+	$Control/CreateEdit.visible = false
+	Data_Pj.datosJP.Nombre = $Control/NameEdit.text
+	Data_Pj._save_data()
+	
+	pass

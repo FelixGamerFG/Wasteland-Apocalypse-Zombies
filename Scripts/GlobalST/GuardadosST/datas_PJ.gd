@@ -3,16 +3,11 @@ extends Node
 const SaveFile  = "user://SaveFile_jp.save"
 
 var datosJP = {
-	"Nombre": "GPA mamaguevo"
+	"Nombre": "name_null"
 }
 
 func _ready() -> void:
 	_load_data()
-
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("ui_cancel"):
-		_save_data()
-		print("ok")
 	
 	
 	
@@ -23,8 +18,10 @@ func _load_data():
 	else:
 		datosJP = file.get_var()
 	file = null
+	print("cargo")
 	
 func _save_data():
 	var file = FileAccess.open(SaveFile,FileAccess.WRITE)
 	file.store_var(datosJP)
 	file = null
+	print("saver")

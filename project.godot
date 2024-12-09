@@ -20,6 +20,11 @@ config/icon="res://icon.svg"
 Data_Pj="*res://Scripts/GlobalST/GuardadosST/datas_PJ.gd"
 GlobalGame="*res://Scripts/GlobalST/GlobalGame.gd"
 
+[display]
+
+window/size/always_on_top=true
+window/stretch/aspect="expand"
+
 [file_customization]
 
 folder_colors={

@@ -8,45 +8,72 @@ size = Vector2(1185, 20)
 [node name="main_scene" type="Node"]
 script = ExtResource("1_2832d")
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CenterContainer" type="CenterContainer" parent="Control"]
+visible = false
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 370.0
+offset_top = 146.0
+offset_right = 748.0
+offset_bottom = 437.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer"]
 layout_mode = 2
 theme_override_constants/separation = 43
 alignment = 1
 
-[node name="host" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="host" type="Button" parent="Control/CenterContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 64
 text = "Crear Partida"
 
-[node name="join" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="join" type="Button" parent="Control/CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "Unirse"
 
-[node name="LineEdit" type="LineEdit" parent="CenterContainer/VBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="Control/CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 placeholder_text = "IP"
 alignment = 1
 
+[node name="NameEdit" type="LineEdit" parent="Control"]
+layout_mode = 2
+offset_left = 353.0
+offset_top = 68.0
+offset_right = 1853.0
+offset_bottom = 213.0
+scale = Vector2(0.3, 0.3)
+theme_override_font_sizes/font_size = 100
+text = "What You Name?"
+alignment = 1
+
+[node name="CreateEdit" type="Button" parent="Control"]
+layout_mode = 2
+offset_left = 468.0
+offset_top = 441.0
+offset_right = 886.0
+offset_bottom = 537.0
+scale = Vector2(0.595, 0.595)
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 64
+text = "Create Count"
+
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://scenes/characters/players/pj.tscn")
 spawn_path = NodePath("..")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(-13, 571)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(582.5, 0)
-shape = SubResource("RectangleShape2D_v1k1n")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -58,5 +85,15 @@ offset_bottom = 143.0
 theme_override_font_sizes/font_size = 100
 text = "mapa "
 
-[connection signal="pressed" from="CenterContainer/VBoxContainer/host" to="." method="_on_host_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/join" to="." method="_on_join_pressed"]
+[node name="Map" type="Node" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Map"]
+position = Vector2(-13, 571)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/StaticBody2D"]
+position = Vector2(582.5, 0)
+shape = SubResource("RectangleShape2D_v1k1n")
+
+[connection signal="pressed" from="Control/CenterContainer/VBoxContainer/host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="Control/CenterContainer/VBoxContainer/join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="Control/CreateEdit" to="." method="_on_create_edit_pressed"]
