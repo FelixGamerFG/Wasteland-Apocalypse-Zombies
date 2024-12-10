@@ -24,7 +24,6 @@ extends CharacterBody2D
 @onready var Chat_Entrada: LineEdit = $UI/Chat/EntradaDeChat
 
 var tiempo = Timer.new()
-var chat = Label.new()
 
 
 
@@ -36,9 +35,12 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
+	add_child(tiempo)
+	tiempo.start(60)
 	if !is_multiplayer_authority():
 		Chat_Entrada.hide()
 		joystick_left.hide()
+		if tiempo.timeout: print(str(int(tiempo.time_left)) + "s: Jugado conectado")
 	
 	if !is_multiplayer_authority(): return
 	LB_name.text = str(Data_Pj.datosJP.Nombre)

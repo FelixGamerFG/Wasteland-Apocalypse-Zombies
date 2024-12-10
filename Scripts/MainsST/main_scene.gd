@@ -3,13 +3,23 @@ extends Node
 ##variables de nodos
 @onready var IP_edit = $Control/CenterContainer/VBoxContainer/LineEdit
 @onready var multijugador_title: Label = $Control/MultijugadorTitle
-@onready var text_map: Label = $Control/textMap
+@onready var text_map: Label = $Control/CenterContainer/VBoxContainer/textMap
 @onready var center_container: CenterContainer = $Control/CenterContainer
 
 ##variables normales
 var peer : ENetMultiplayerPeer = ENetMultiplayerPeer.new()
-var IP_ADRESS = "localhost" #for gpa
+var IP_ADRESS = "localhost"
 var PORT = 7777
+
+var tiempo = Timer.new()
+
+
+
+func _ready() -> void:
+	IP_edit.text = "1"
+	add_child(tiempo)
+	tiempo.start(60)
+	if tiempo.timeout: print(str(int(tiempo.time_left)) + "s: " + "Account: " + Data_Pj.datosJP.Nombre)
 
 
 
@@ -27,7 +37,11 @@ func _process(delta: float) -> void:
 		
 	if IP_edit.text == "1":
 		IP_ADRESS = "localhost"
-
+	
+	
+	
+	
+	
 
 
 ##crear partida
@@ -37,7 +51,7 @@ func _on_host_pressed() -> void:
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	_on_peer_connected()
 	center_container.hide()
-	print("Partida Creada")
+	if tiempo.timeout: print(str(int(tiempo.time_left)) + "s: Partida Creada")
 
 	
 ##unirce a partida
@@ -45,7 +59,7 @@ func _on_join_pressed() -> void:
 	peer.create_client(IP_ADRESS,PORT)
 	multiplayer.multiplayer_peer = peer
 	center_container.hide()
-	print("Partida unida")
+	if tiempo.timeout: print(str(int(tiempo.time_left)) + "s: Partida unida")
 
 
 ##Evento de reconocer cuando un player se conecta
@@ -55,4 +69,3 @@ func _on_peer_connected(id : int = 1):
 	var player_scene = load("res://scenes/characters/players/pj.tscn").instantiate()
 	player_scene.name = str(id)
 	add_child(player_scene, true)
-	print("Jugado conectado")

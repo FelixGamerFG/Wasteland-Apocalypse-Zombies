@@ -9,10 +9,15 @@ var datosJP = {
 	"Nombre": "name_null"
 }
 
-##evento al empezar
+var tiempo = Timer.new()
+
+
+##nodo al empezar
 func _ready() -> void:
 	_load_data()
-	print("leer datos de salvados")
+	add_child(tiempo)
+	tiempo.start(60)
+	if tiempo.timeout: print(str(int(tiempo.time_left)) + "s: leer datos de salvados")
 	
 	
 ##cargar partida
@@ -23,11 +28,11 @@ func _load_data():
 	else:
 		datosJP = file.get_var()
 	file = null
-	print("cargo")
+	if tiempo.timeout: print(str(int(tiempo.time_left)) + "s: cargo")
 
 ##salvar partida
 func _save_data():
 	var file = FileAccess.open(SaveFile,FileAccess.WRITE)
 	file.store_var(datosJP)
 	file = null
-	print("saver")
+	if tiempo.timeout: print(str(int(tiempo.time_left)) + "s: saver")

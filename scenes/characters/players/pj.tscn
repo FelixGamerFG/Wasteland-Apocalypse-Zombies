@@ -81,9 +81,10 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t5xkd"]
 size = Vector2(20, 30)
 
-[node name="PJ" type="CharacterBody2D" groups=["Player"]]
+[node name="PJ" type="CharacterBody2D" node_paths=PackedStringArray("joystick_left") groups=["Player"]]
 collision_layer = 2
 script = ExtResource("1_ewq7v")
+joystick_left = NodePath("UI/Virtual joystick left")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -105,6 +106,7 @@ offset_bottom = 265.0
 scale = Vector2(0.2, 0.2)
 
 [node name="Infor_UI" type="Label" parent="UI/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 100
 theme_override_styles/normal = SubResource("StyleBoxFlat_53op7")

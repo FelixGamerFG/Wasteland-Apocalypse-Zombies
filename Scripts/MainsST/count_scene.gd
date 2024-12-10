@@ -5,17 +5,19 @@ extends Node
 @onready var Fondo: ColorRect = $Control/UI/ColorRect
 @onready var Error: Label = $Control/UI/Error
 
-	
+var tiempo = Timer.new()
 
 
 ##nodo al empezar
 func _ready() -> void:
 	Error.visible = false
+	add_child(tiempo)
+	tiempo.start(60)
 	
 	#verificar cuenta existente
 	if Data_Pj.datosJP.Nombre != "name_null":
 		get_tree().change_scene_to_file("res://scenes/menues/main_scene.tscn")
-		print("Cuenta iniciada")
+		if tiempo.timeout: print(str(int(tiempo.time_left)) + "s: Cuenta iniciada")
 
 func _process(delta: float) -> void:
 	if name_edit.text != "":
@@ -31,7 +33,7 @@ func _on_create_edit_pressed() -> void:
 	else:
 		Error.visible = true
 	
-	print("Cuenta iniciada")	
+	if tiempo.timeout: print(str(int(tiempo.time_left)) + "s: Cuenta iniciada")	
 
 	
 	pass
