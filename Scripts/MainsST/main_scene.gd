@@ -56,5 +56,4 @@ func _on_peer_connected(id : int = 1):
 	var player_scene = load("res://scenes/characters/players/pj.tscn").instantiate()
 	player_scene.name = str(id)
 	add_child(player_scene, true)
-	print(str(id))
 	print("Jugado conectado")

@@ -1,8 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://dfl4ht66luubx"]
+[gd_scene load_steps=11 format=3 uid="uid://dfl4ht66luubx"]
 
 [ext_resource type="Script" path="res://Scripts/charactersST/player.gd" id="1_ewq7v"]
 [ext_resource type="Texture2D" uid="uid://dj3rbgplleckx" path="res://resource/Sprites/characters/players/sprites_player_ajolote-Sheet.png" id="2_vojou"]
 [ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="3_6l8q6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_53op7"]
+bg_color = Color(0, 0, 0, 0.196078)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_lgxgu"]
 properties/0/path = NodePath(".:position")
@@ -94,6 +97,19 @@ vframes = 12
 offset_top = -300.0
 offset_bottom = 0.0
 
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+offset_left = 20.0
+offset_top = 128.0
+offset_right = 1213.0
+offset_bottom = 265.0
+scale = Vector2(0.2, 0.2)
+
+[node name="Infor_UI" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+theme_override_styles/normal = SubResource("StyleBoxFlat_53op7")
+text = "Infornacion de la partida"
+
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_lgxgu")
 
@@ -103,7 +119,7 @@ libraries = {
 }
 
 [node name="Camara" type="Camera2D" parent="."]
-position = Vector2(2, 1)
+position = Vector2(2, -27)
 enabled = false
 zoom = Vector2(3, 3)
 position_smoothing_enabled = true

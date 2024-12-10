@@ -13,10 +13,12 @@ extends CharacterBody2D
 @onready var Anim = $Anim
 @onready var Camara = $Camara
 @onready var Skin2d : Sprite2D = $Sprite2D
+@onready var alineacionChat: VBoxContainer = $UI/VBoxContainer
 @onready var LB_name: Label = $Name
 
 
-
+var tiempo = Timer.new()
+var chat = Label.new()
 
 
 
@@ -30,6 +32,15 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	if !is_multiplayer_authority(): return
 	LB_name.text = str(Data_Pj.datosJP.Nombre)
+	
+	#alineacionChat.add_child(chat)
+	#chat.text = "esto es una informacion de la partida"
+	#chat.scale.x = 0.2
+	#chat.scale.y = 0.2
+	#
+	#tiempo.start(2)
+	#if tiempo.timeout:
+		#chat.queue_free()
 
 
 
@@ -38,6 +49,8 @@ func _process(delta: float) -> void:
 	if !is_multiplayer_authority(): return
 	## Script para darle autoridad a la camara de cada jugador
 	Camara.enabled = true
+	
+	
 	
 	
 	
