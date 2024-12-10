@@ -14,7 +14,7 @@ func _ready() -> void:
 	
 	#verificar cuenta existente
 	if Data_Pj.datosJP.Nombre != "name_null":
-		get_tree().change_scene_to_file("res://scenes/main_scene.tscn")
+		get_tree().change_scene_to_file("res://scenes/menues/main_scene.tscn")
 		print("Cuenta iniciada")
 
 func _process(delta: float) -> void:
@@ -27,7 +27,7 @@ func _on_create_edit_pressed() -> void:
 	Data_Pj.datosJP.Nombre = name_edit.text
 	Data_Pj._save_data()
 	if name_edit.text != "":
-		get_tree().change_scene_to_file("res://scenes/main_scene.tscn")
+		get_tree().change_scene_to_file("res://scenes/menues/main_scene.tscn")
 	else:
 		Error.visible = true
 	

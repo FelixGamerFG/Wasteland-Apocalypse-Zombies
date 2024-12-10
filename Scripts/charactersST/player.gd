@@ -8,7 +8,7 @@ extends CharacterBody2D
 @export var grav: float = 50
 
 
-#propiedades  (exports)
+#propiedades
 @export var joystick_left : VirtualJoystick
 @onready var Anim = $Anim
 @onready var Camara = $Camara
@@ -16,6 +16,12 @@ extends CharacterBody2D
 @onready var alineacionChat: VBoxContainer = $UI/VBoxContainer
 @onready var LB_name: Label = $Name
 
+## Timers
+@onready var TimerChat: Timer= $Timers/TimerChat
+
+##Chat
+@onready var SalidaChat: Label = $Chat
+@onready var Chat_Entrada: LineEdit = $UI/Chat/EntradaDeChat
 
 var tiempo = Timer.new()
 var chat = Label.new()
@@ -30,6 +36,10 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
+	if !is_multiplayer_authority():
+		Chat_Entrada.hide()
+		joystick_left.hide()
+	
 	if !is_multiplayer_authority(): return
 	LB_name.text = str(Data_Pj.datosJP.Nombre)
 	
@@ -49,9 +59,6 @@ func _process(delta: float) -> void:
 	if !is_multiplayer_authority(): return
 	## Script para darle autoridad a la camara de cada jugador
 	Camara.enabled = true
-	
-	
-	
 	
 	
 	if velocity.x > 0 && velocity.y == 0:
@@ -88,3 +95,17 @@ func _physics_process(delta: float) -> void:
 	#movimientos horizontales
 	velocity.x = Input.get_axis("ui_left","ui_right") * speed
 	move_and_slide()
+
+
+func _on_entrada_de_chat_text_submitted(new_text: String) -> void:
+	rpc("_set_chat_salida", new_text)
+	Chat_Entrada.release_focus()
+	Chat_Entrada.text = ""
+	TimerChat.start(3)
+	
+@rpc("authority","call_local")
+func _set_chat_salida(text: String):
+	SalidaChat.text = text
+
+func _on_timer_chat_timeout() -> void:
+	rpc("_set_chat_salida", "")

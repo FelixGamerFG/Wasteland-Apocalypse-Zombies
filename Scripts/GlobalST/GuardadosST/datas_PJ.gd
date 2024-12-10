@@ -2,7 +2,7 @@ extends Node
 
 ##variables
 #constrantes
-const SaveFile = "user://SaveFile_jp.save"
+const SaveFile = "res://Saves/SaveFile.text"
 
 #normales
 var datosJP = {

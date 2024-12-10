@@ -1,11 +1,10 @@
 extends Node
 
 ##variables de nodos
-@onready var IP_edit = $CanvasLayer/Control/CenterContainer/VBoxContainer/LineEdit
-@onready var multijugador_title: Label = $CanvasLayer/Control/MultijugadorTitle
-@onready var text_map: Label = $CanvasLayer/Control/textMap
-@onready var center_container: CenterContainer = $CanvasLayer/Control/CenterContainer
-@onready var menu: CanvasLayer = $CanvasLayer
+@onready var IP_edit = $Control/CenterContainer/VBoxContainer/LineEdit
+@onready var multijugador_title: Label = $Control/MultijugadorTitle
+@onready var text_map: Label = $Control/textMap
+@onready var center_container: CenterContainer = $Control/CenterContainer
 
 ##variables normales
 var peer : ENetMultiplayerPeer = ENetMultiplayerPeer.new()
@@ -37,7 +36,7 @@ func _on_host_pressed() -> void:
 	multiplayer.multiplayer_peer = peer
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	_on_peer_connected()
-	menu.hide()
+	center_container.hide()
 	print("Partida Creada")
 
 	
@@ -45,7 +44,7 @@ func _on_host_pressed() -> void:
 func _on_join_pressed() -> void:
 	peer.create_client(IP_ADRESS,PORT)
 	multiplayer.multiplayer_peer = peer
-	menu.hide()
+	center_container.hide()
 	print("Partida unida")
 
 
