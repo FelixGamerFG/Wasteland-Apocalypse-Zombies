@@ -14,6 +14,13 @@ spawn_path = NodePath("..")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+offset_left = -639.0
+offset_top = -138.0
+offset_right = 1933.0
+offset_bottom = 784.0
+color = Color(0.143494, 0, 0.00452579, 1)
+
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0

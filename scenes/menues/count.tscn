@@ -11,8 +11,16 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="NameEdit" type="LineEdit" parent="Control"]
-layout_mode = 0
+[node name="UI" type="CanvasLayer" parent="Control"]
+
+[node name="ColorRect" type="ColorRect" parent="Control/UI"]
+offset_left = -639.0
+offset_top = -138.0
+offset_right = 1933.0
+offset_bottom = 784.0
+color = Color(0.00646313, 0, 0.150661, 1)
+
+[node name="NameEdit" type="LineEdit" parent="Control/UI"]
 offset_left = 353.0
 offset_top = 68.0
 offset_right = 1853.0
@@ -22,8 +30,7 @@ theme_override_font_sizes/font_size = 100
 placeholder_text = "What You Name?"
 alignment = 1
 
-[node name="CreateEdit" type="Button" parent="Control"]
-layout_mode = 0
+[node name="CreateEdit" type="Button" parent="Control/UI"]
 offset_left = 468.0
 offset_top = 441.0
 offset_right = 886.0
@@ -33,4 +40,12 @@ size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 64
 text = "Create Count"
 
-[connection signal="pressed" from="Control/CreateEdit" to="." method="_on_create_edit_pressed"]
+[node name="Error" type="Label" parent="Control/UI"]
+offset_left = 468.0
+offset_top = 117.0
+offset_right = 720.0
+offset_bottom = 140.0
+theme_override_colors/font_color = Color(0.808137, 3.27289e-06, 7.70092e-07, 1)
+text = "\"Pon un nombre para tu cuenta\""
+
+[connection signal="pressed" from="Control/UI/CreateEdit" to="." method="_on_create_edit_pressed"]

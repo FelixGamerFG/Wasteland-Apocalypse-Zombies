@@ -1,11 +1,14 @@
 class_name player
 extends CharacterBody2D
 
+##variables
+#propiedades de jugador (exports)
 @export var speed : float = 100
 @export var jump : float = 400
 @export var grav: float = 50
 
 
+#propiedades  (exports)
 @export var joystick_left : VirtualJoystick
 @onready var Anim = $Anim
 @onready var Camara = $Camara
@@ -54,6 +57,8 @@ func _process(delta: float) -> void:
 		
 	if velocity.y < 0:
 		Anim.play("QUIETO")
+
+
 
 func _physics_process(delta: float) -> void:
 	if !is_multiplayer_authority(): return
