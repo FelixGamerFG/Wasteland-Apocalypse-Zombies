@@ -1,11 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://dfl4ht66luubx"]
+[gd_scene load_steps=10 format=3 uid="uid://chaxrbtrco6e6"]
 
-[ext_resource type="Script" path="res://Scripts/charactersST/player.gd" id="1_ewq7v"]
-[ext_resource type="Texture2D" uid="uid://dj3rbgplleckx" path="res://resource/Sprites/characters/players/sprites_player_ajolote-Sheet.png" id="2_vojou"]
-[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="3_6l8q6"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_53op7"]
-bg_color = Color(0, 0, 0, 0.196078)
+[ext_resource type="Script" path="res://Scripts/charactersST/player_2.gd" id="1_eedj2"]
+[ext_resource type="Texture2D" uid="uid://dj3rbgplleckx" path="res://resource/Sprites/characters/players/sprites_player_ajolote-Sheet.png" id="2_vcjpv"]
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="3_ckttu"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_lgxgu"]
 properties/0/path = NodePath(".:position")
@@ -81,57 +78,21 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t5xkd"]
 size = Vector2(20, 30)
 
-[node name="PJ" type="CharacterBody2D" node_paths=PackedStringArray("joystick_left") groups=["Control1", "Player"]]
+[node name="PJ2" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 2
-script = ExtResource("1_ewq7v")
-joystick_left = NodePath("UI/Virtual joystick left")
+script = ExtResource("1_eedj2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("2_vojou")
+texture = ExtResource("2_vcjpv")
 hframes = 13
 vframes = 12
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Virtual joystick left" parent="UI" instance=ExtResource("3_6l8q6")]
+[node name="Virtual joystick left" parent="UI" instance=ExtResource("3_ckttu")]
 offset_top = -300.0
 offset_bottom = 0.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
-offset_left = 20.0
-offset_top = 128.0
-offset_right = 1213.0
-offset_bottom = 265.0
-scale = Vector2(0.2, 0.2)
-
-[node name="Infor_UI" type="Label" parent="UI/VBoxContainer"]
-visible = false
-layout_mode = 2
-theme_override_font_sizes/font_size = 100
-theme_override_styles/normal = SubResource("StyleBoxFlat_53op7")
-text = "Infornacion de la partida"
-
-[node name="Chat" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="EntradaDeChat" type="LineEdit" parent="UI/Chat"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -416.0
-offset_top = -64.0
-grow_horizontal = 0
-grow_vertical = 0
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_lgxgu")
@@ -163,20 +124,4 @@ theme_override_font_sizes/font_size = 100
 text = "name null"
 horizontal_alignment = 1
 
-[node name="Chat" type="Label" parent="."]
-offset_left = -59.0
-offset_top = -79.0
-offset_right = 1121.0
-offset_bottom = 361.0
-scale = Vector2(0.1, 0.1)
-theme_override_font_sizes/font_size = 100
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
-
 [node name="Timers" type="Node" parent="."]
-
-[node name="TimerChat" type="Timer" parent="Timers"]
-
-[connection signal="text_submitted" from="UI/Chat/EntradaDeChat" to="." method="_on_entrada_de_chat_text_submitted"]
-[connection signal="timeout" from="Timers/TimerChat" to="." method="_on_timer_chat_timeout"]

@@ -9,58 +9,17 @@ size = Vector2(1185, 20)
 [node name="main_scene" type="Node"]
 script = ExtResource("1_0j7d2")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = 1.0
-offset_right = 2.0
-offset_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
-handle_input_locally = false
-size = Vector2i(576, 648)
-render_target_update_mode = 4
-
-[node name="Camera_pj1" type="Camera2D" parent="SubViewportContainer/SubViewport"]
-position_smoothing_enabled = true
-position_smoothing_speed = 6.0
-
-[node name="SubViewportContainer2" type="SubViewportContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 577.0
-offset_top = 1.0
-offset_right = 577.0
-offset_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer2"]
-handle_input_locally = false
-size = Vector2i(576, 648)
-render_target_update_mode = 4
-
-[node name="Camera_pj2" type="Camera2D" parent="SubViewportContainer2/SubViewport"]
-position_smoothing_enabled = true
-position_smoothing_speed = 6.0
-
 [node name="Menues" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -752.0
-offset_bottom = -408.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_ldxva")
 
 [node name="Menu_Principal" type="Control" parent="Menues"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -124,7 +83,6 @@ text = "Salir"
 flat = true
 
 [node name="Multijugador" type="Control" parent="Menues"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -165,8 +123,6 @@ offset_left = 641.0
 offset_top = 1.0
 offset_right = 1481.0
 offset_bottom = 1064.0
-grow_horizontal = 2
-grow_vertical = 2
 scale = Vector2(0.608639, 0.608639)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Menues/Multijugador/CenterContainer"]
@@ -186,7 +142,7 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 64
 text = "Multijugador"
 
-[node name="IP_Edit" type="LineEdit" parent="Menues/Multijugador/CenterContainer/VBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="Menues/Multijugador/CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 placeholder_text = "IP"
@@ -203,8 +159,9 @@ offset_bottom = 800.0
 color = Color(0.143494, 0, 0.00452579, 1)
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://scenes/characters/players/pj.tscn", "res://scenes/characters/players/pj2.tscn")
+_spawnable_scenes = PackedStringArray("res://scenes/characters/players/pj.tscn")
 spawn_path = NodePath("..")
+spawn_limit = 1
 
 [node name="Map" type="Node" parent="."]
 
@@ -216,12 +173,6 @@ position = Vector2(582.5, 0)
 shape = SubResource("RectangleShape2D_v1k1n")
 
 [node name="Spawns" type="Node" parent="."]
-
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 
 [connection signal="pressed" from="Menues/Menu_Principal/CenterContainer/VBoxContainer/host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="Menues/Menu_Principal/CenterContainer/VBoxContainer/Multijugador" to="Menues" method="_on_multijugador_pressed"]

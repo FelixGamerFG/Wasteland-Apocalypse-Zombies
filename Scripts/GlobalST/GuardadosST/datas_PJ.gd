@@ -4,9 +4,11 @@ extends Node
 #constrantes
 const SaveFile = "res://Saves/SaveFile.text"
 
+
 #normales
 var datosJP = {
-	"Nombre": "name_null"
+	"Nombre": "name_null",
+	"Nombre2": "name_null"
 }
 
 var tiempo = Timer.new()
