@@ -24,6 +24,10 @@ extends CharacterBody2D
 @onready var Chat_Entrada: LineEdit = $UI/Chat/EntradaDeChat
 
 var tiempo = Timer.new()
+@onready var world = $"../Map/TileMapLayer"
+
+@onready var chunk_pos = Vector2(position.x / (world.chunk_size * 16) , position.y / (world.chunk_size * 16))
+@onready var prevchunkpos = chunk_pos
 
 
 
@@ -62,6 +66,11 @@ func _process(delta: float) -> void:
 	## Script para darle autoridad a la camara de cada jugador
 	Camara.enabled = true
 	
+	chunk_pos = Vector2(position.x / (world.chunk_size * 16) , position.y / (world.chunk_size * 16))
+	
+	if prevchunkpos != chunk_pos:
+		world.generate_world(chunk_pos)
+		prevchunkpos = chunk_pos
 	
 	if velocity.x > 0 && velocity.y == 0:
 		Anim.play("CAMIMAR")

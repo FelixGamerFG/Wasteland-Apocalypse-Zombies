@@ -53,6 +53,7 @@ func _on_host_pressed() -> void:
 	peer.create_server(PORT,5)
 	multiplayer.multiplayer_peer = peer
 	multiplayer.peer_connected.connect(_on_peer_connected)
+	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 	_on_peer_connected()
 	if tiempo.timeout: print(str(int(tiempo.time_left)) + "s: Partida Creada")
 
@@ -71,8 +72,21 @@ func _on_peer_connected(id : int = 1):
 	var player_scene = load("res://scenes/characters/players/pj.tscn").instantiate()
 	player_scene.name = str(id)
 	add_child(player_scene, true)
+
+##Evento de reconocer cuando un player se desconecta
+func _on_peer_disconnected(id : int):
+	for child in get_children():
+		if child is player && child.name == str(id):
+			child.queue_free()
+			
+			
+##NO TOCAR ESTA FUNCION , NO ESTA TERMINADA, ESTA EN FASE DE PRUEBA
+func _on_server_disconnected(id : int = 1):
+	get_tree().reload_current_scene()
+	multiplayer.multiplayer_peer = null
 	
-##Evento de reconocer cuando un player se conecta
+	
+##Evento de reconocer cuando un player se conecta localmente(misma pantalla)
 func _on_peer_connected_local(id : int = 2):
 	var player_scene = load("res://scenes/characters/players/pj2.tscn").instantiate()
 	player_scene.name = str(id)
