@@ -9,7 +9,7 @@ extends CharacterBody2D
 #propiedades
 @export var joystick_left : VirtualJoystick
 @onready var Anim = $Anim
-@onready var Camara = $Camara
+@onready var Camara = $Camera_pj1
 @onready var Skin2d : Sprite2D = $Sprite2D
 @onready var alineacionChat: VBoxContainer = $UI/VBoxContainer
 @onready var LB_name: Label = $Name
@@ -20,6 +20,8 @@ var tiempo = Timer.new()
 
 
 func _ready() -> void:
+	get_node("Camera_pj1").visible = false
+	
 	add_child(tiempo)
 	tiempo.start(60)
 	
@@ -33,7 +35,7 @@ func _process(delta: float) -> void:
 	
 	
 	## Script para darle autoridad a la camara de cada jugador
-	Camara.enabled = true
+	Camara.enabled = false
 	
 	
 	if velocity.x > 0 && velocity.y == 0:

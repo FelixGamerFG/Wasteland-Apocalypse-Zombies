@@ -18,6 +18,9 @@ properties/3/path = NodePath("Name:text")
 properties/3/spawn = true
 properties/3/replication_mode = 1
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t5xkd"]
+size = Vector2(20, 30)
+
 [sub_resource type="Animation" id="Animation_mvyqt"]
 resource_name = "CAMINAR"
 length = 0.6
@@ -75,18 +78,18 @@ _data = {
 "RESET": SubResource("Animation_7wob4")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_t5xkd"]
-size = Vector2(20, 30)
-
-[node name="PJ2" type="CharacterBody2D" groups=["Player"]]
+[node name="PJ2" type="CharacterBody2D" groups=["Control2", "Player"]]
 collision_layer = 2
 script = ExtResource("1_eedj2")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture_filter = 1
-texture = ExtResource("2_vcjpv")
-hframes = 13
-vframes = 12
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_left = -218.0
+offset_top = -122.0
+offset_right = -178.0
+offset_bottom = -82.0
+scale = Vector2(11.8065, 6.33333)
+color = Color(0, 1, 0, 1)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -97,21 +100,28 @@ offset_bottom = 0.0
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_lgxgu")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_vcjpv")
+hframes = 13
+vframes = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_t5xkd")
+
+[node name="Timers" type="Node" parent="."]
+
 [node name="Anim" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_fhbfd")
 }
 
-[node name="Camara" type="Camera2D" parent="."]
-position = Vector2(2, -27)
+[node name="Camera_pj1" type="Camera2D" parent="."]
 enabled = false
 zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 position_smoothing_speed = 6.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 3)
-shape = SubResource("RectangleShape2D_t5xkd")
 
 [node name="Name" type="Label" parent="."]
 modulate = Color(0, 1, 0, 1)
@@ -123,5 +133,3 @@ scale = Vector2(0.1, 0.1)
 theme_override_font_sizes/font_size = 100
 text = "name null"
 horizontal_alignment = 1
-
-[node name="Timers" type="Node" parent="."]

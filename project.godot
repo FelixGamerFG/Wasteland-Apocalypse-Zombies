@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Wasteland-Apocalypse-Zombies"
+config/tags=PackedStringArray("2d", "survival", "zombie")
 run/main_scene="res://scenes/menues/count.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
@@ -19,7 +20,8 @@ config/icon="res://icon.svg"
 
 Data_Pj="*res://Scripts/GlobalST/GuardadosST/datas_PJ.gd"
 GlobalGame="*res://Scripts/GlobalST/GlobalGame.gd"
-GlobalSpawnPj="res://Scripts/GlobalST/GlobalSpawnPJ.gd"
+GlobalSpawnPj="*res://Scripts/GlobalST/GlobalSpawnPJ.gd"
+Mapa="res://scenes/Map/mapa.tscn"
 
 [display]
 

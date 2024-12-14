@@ -23,11 +23,12 @@ extends CharacterBody2D
 @onready var SalidaChat: Label = $Chat
 @onready var Chat_Entrada: LineEdit = $UI/Chat/EntradaDeChat
 
-var tiempo = Timer.new()
-@onready var world = $"../Map/TileMapLayer"
-
-@onready var chunk_pos = Vector2(position.x / (world.chunk_size * 16) , position.y / (world.chunk_size * 16))
+@onready var world = $"../Mapa/TileMapLayer"
+@onready var chunk_pos = Vector2(position.x / (world.chunk_size * 36) , position.y / (world.chunk_size * 36))
 @onready var prevchunkpos = chunk_pos
+
+var tiempo = Timer.new()
+
 
 
 
@@ -39,6 +40,7 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
+	get_node("Camara").visible = false
 	add_child(tiempo)
 	tiempo.start(60)
 	if !is_multiplayer_authority():
@@ -49,29 +51,42 @@ func _ready() -> void:
 	if !is_multiplayer_authority(): return
 	LB_name.text = str(Data_Pj.datosJP.Nombre)
 	
-	#alineacionChat.add_child(chat)
-	#chat.text = "esto es una informacion de la partida"
-	#chat.scale.x = 0.2
-	#chat.scale.y = 0.2
-	#
-	#tiempo.start(2)
-	#if tiempo.timeout:
-		#chat.queue_free()
+
+
+
+func _physics_process(delta: float) -> void:
+	
+	if !is_multiplayer_authority(): return
+	## Movement using Input functions:
+	
+	chunk_pos = Vector2(floor(position.x / (world.chunk_size * 36)) , floor(position.y / (world.chunk_size * 36)))
+	
+	if prevchunkpos != chunk_pos:
+		world.update_chunk(chunk_pos)
+		prevchunkpos = chunk_pos
+
+	
+	if !is_on_floor():
+		velocity.y += grav
+		
+	#salto
+	if is_on_floor() && Input.is_action_just_pressed("ui_up"):
+		velocity.y -= jump
+	
+	#movimientos horizontales
+	velocity.x = Input.get_axis("ui_left","ui_right") * speed
+	move_and_slide()
+
 
 
 
 func _process(delta: float) -> void:
+		
 	
 	if !is_multiplayer_authority(): return
 	## Script para darle autoridad a la camara de cada jugador
 	Camara.enabled = true
-	
-	chunk_pos = Vector2(position.x / (world.chunk_size * 16) , position.y / (world.chunk_size * 16))
-	
-	if prevchunkpos != chunk_pos:
-		world.generate_world(chunk_pos)
-		prevchunkpos = chunk_pos
-	
+		
 	if velocity.x > 0 && velocity.y == 0:
 		Anim.play("CAMIMAR")
 		Skin2d.flip_h = false
@@ -88,24 +103,6 @@ func _process(delta: float) -> void:
 		
 	if velocity.y < 0:
 		Anim.play("QUIETO")
-
-
-
-func _physics_process(delta: float) -> void:
-	if !is_multiplayer_authority(): return
-	## Movement using Input functions:
-	
-	
-	if !is_on_floor():
-		velocity.y += grav
-		
-	#salto
-	if is_on_floor() && Input.is_action_just_pressed("ui_up"):
-		velocity.y -= jump
-	
-	#movimientos horizontales
-	velocity.x = Input.get_axis("ui_left","ui_right") * speed
-	move_and_slide()
 
 
 func _on_entrada_de_chat_text_submitted(new_text: String) -> void:

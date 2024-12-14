@@ -5,6 +5,12 @@ extends Node
 @onready var multijugador_title: Label = $Menues/MultijugadorTitle
 @onready var IP_ADRESS_LB: Label = $Menues/Multijugador/CenterContainer/VBoxContainer/IP
 @onready var center_container: CenterContainer = $Menues/CenterContainer
+@onready var camera = $SubViewport/Camera_pj1
+@onready var sprite_2d: Sprite2D = $Menues/Backgroung/Sprite2D
+@onready var mode_local: CanvasLayer = $UI_jugs_local
+@onready var pj2 = $"../$SubViewport/Camera_pj1/2"
+
+
 
 ##variables normales
 var peer : ENetMultiplayerPeer = ENetMultiplayerPeer.new()
@@ -21,16 +27,26 @@ func _ready() -> void:
 	if tiempo.timeout: print(str(int(tiempo.time_left)) + "s: " + "Account: " + Data_Pj.datosJP.Nombre)
 	if tiempo.timeout: print(str(int(tiempo.time_left)) + "s: " + "Account2: " + Data_Pj.datosJP.Nombre2)
 
+	
+
 
 
 ##evento constante
 func _process(delta: float) -> void:
+	
+	
+	##sistema de multijugador local (Censurado)
+	#if pj2 != null:
+		#camera.position.x = pj2.position.x
+		#camera.position.y = pj2.position.y
+	
+	
 	IP_ADRESS_LB.text = IP_ADRESS
-	#if Input.is_action_just_pressed("ui_accept"):
-		#get_tree().reload_current_scene()
-	if $Menues.activar_multiplayer && permiso_local:
-		_on_peer_connected_local()
-		$Menues.activar_multiplayer = false
+	
+	##sistema de multijugador local (Censurado)
+	#if $Menues.activar_multiplayer && permiso_local:
+		#_on_peer_connected_local()
+		#$Menues.activar_multiplayer = false
 	
 	#Por ahora no funciona
 	if IP_edit.text == "":
@@ -72,6 +88,10 @@ func _on_peer_connected(id : int = 1):
 	var player_scene = load("res://scenes/characters/players/pj.tscn").instantiate()
 	player_scene.name = str(id)
 	add_child(player_scene, true)
+	
+	
+	
+	
 
 ##Evento de reconocer cuando un player se desconecta
 func _on_peer_disconnected(id : int):
@@ -85,20 +105,15 @@ func _on_server_disconnected(id : int = 1):
 	get_tree().reload_current_scene()
 	multiplayer.multiplayer_peer = null
 	
-	
+
+##sistema de multijugador local (Censurado)	
 ##Evento de reconocer cuando un player se conecta localmente(misma pantalla)
-func _on_peer_connected_local(id : int = 2):
-	var player_scene = load("res://scenes/characters/players/pj2.tscn").instantiate()
-	player_scene.name = str(id)
-	add_child(player_scene, true)
-	camara_follow()
+#func _on_peer_connected_local(id : int = 2):
+	#mode_local.visible = true
+	#var player_scene = load("res://scenes/characters/players/pj2.tscn").instantiate()
+	#player_scene.name = str(id)
+	#add_child(player_scene, true)
 	
 	
-func camara_follow():
-	var camera = $SubViewportContainer/SubViewport/Camera_pj1
-	var camera2 = $SubViewportContainer/SubViewport/Camera_pj2
 	
-	get_tree().get_nodes_in_group("Control1")[0].position.x = camera.position.x
-	get_tree().get_nodes_in_group("Control1")[0].position.y = camera.position.y
-	get_tree().get_nodes_in_group("Control2")[0].position.x = camera2.position.x
-	get_tree().get_nodes_in_group("Control2")[0].position.y = camera2.position.y
+	

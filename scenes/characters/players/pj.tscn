@@ -84,6 +84,7 @@ size = Vector2(20, 30)
 [node name="PJ" type="CharacterBody2D" node_paths=PackedStringArray("joystick_left") groups=["Control1", "Player"]]
 collision_layer = 2
 script = ExtResource("1_ewq7v")
+jump = 600.0
 joystick_left = NodePath("UI/Virtual joystick left")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -95,8 +96,8 @@ vframes = 12
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Virtual joystick left" parent="UI" instance=ExtResource("3_6l8q6")]
-offset_top = -300.0
-offset_bottom = 0.0
+offset_top = -292.0
+offset_bottom = 8.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI"]
 offset_left = 20.0
@@ -128,8 +129,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -416.0
-offset_top = -64.0
+offset_left = 332.0
+offset_top = 327.0
+offset_right = 748.0
+offset_bottom = 391.0
 grow_horizontal = 0
 grow_vertical = 0
 
@@ -143,8 +146,7 @@ libraries = {
 
 [node name="Camara" type="Camera2D" parent="."]
 position = Vector2(2, -27)
-enabled = false
-zoom = Vector2(3, 3)
+zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 position_smoothing_speed = 6.0
 
